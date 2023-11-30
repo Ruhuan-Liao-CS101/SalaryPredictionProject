@@ -1,18 +1,72 @@
- 
- <!DOCTYPE html>
- <html lang="en">
- <head>
-   <title>ur app..</title>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   
- </head>
-  <body>
+<!DOCTYPE html>
+<html lang="en">
 
-        <form action="/predict" method="POST">
-            <H2>Click Me</H2>
-            <input type="text" name="text">
-            <input type="submit" value="Submit">
-       </form>
-    </body>
+<head>
+  <title>Salary Prediction</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body>
+
+  <form action="/predict" method="POST">
+    <h2>Enter Your Information</h2>
+
+    <label for="age">Age:</label>
+    <input type="text" name="age" required>
+
+    <label for="gender">Gender:</label>
+    <select name="gender" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">other</option>
+      <!-- Add more options if needed -->
+    </select>
+
+    <label for="education">Education Level:</label>
+    <select name="education" required>
+      <option value="high_school">High School</option>
+      <option value="bachelor">Bachelor's Degree</option>
+      <option value="master">Master's Degree</option>
+      <option value="PhD">PhD</option>
+      <option value="Unknown">Unknown</option>
+      <!-- Add more options if needed -->
+    </select>
+
+    <label for="job_title">Job Title:</label>
+    <select name="job_title" required>
+      <option value="0">Account Manager</option>
+      <option value="1">Accountant</option>
+      <option value="2">Administrative Assistant</option>
+      <option value="3">Back end Developer</option>
+      <option value="4">Business Analyst</option>
+      <option value="5">Business Development Manager</option>
+      <option value="6">Business Intelligence Analyst</option>
+      <option value="7">CEO</option>
+      <option value="8">Chief Data Officer</option>
+      <option value="9">Chief Technology Officer</option>
+      <option value="10">Content Marketing Manager</option>
+      <option value="11">Copywriter</option>
+      <option value="12">Creative Director</option>
+      <option value="13">Customer Service Manager</option>
+      <option value="14">Customer Service Rep</option>
+      <option value="15">Customer Service Representative</option>
+      <option value="16">Customer Success Manager</option>
+      <option value="17">Customer Success Rep</option>
+      <option value="18">Data Analyst</option>
+      <option value="19">Data Entry Clerk</option>
+      <option value="20">Data Scientist</option>
+      <!-- Add all other job titles with their respective values -->
+      <option value="193">Web Developer</option>
+    </select>
+
+    <label for="experience">Years of Experience:</label>
+    <input type="text" name="experience" required>
+
+    <input type="submit" value="Submit">
+  </form>
+
+</body>
+
 </html>
