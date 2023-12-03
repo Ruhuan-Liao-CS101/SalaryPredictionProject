@@ -1,4 +1,6 @@
 import flask
+import joblib
+import pandas as pd
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -8,9 +10,9 @@ def init():
     print("initializing... ")
 
 
-# Load your trained model
+# Load the trained model
 model = joblib.load(
-    '/Users/ruhuanliao/Fall 2023/AI/PredictProject/Archive/SalaryPrediction.ipynb')
+    '/Users/ruhuanliao/Fall 2023/AI/PredictProject/Archive/SalaryPrediction.pkl')
 
 
 @app.route('/')
@@ -20,31 +22,32 @@ def index():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Get input data from the form
-    input_data = {
-        'age': float(request.form.get('age', 0)),
-        'gender': request.form.get('gender', ''),
-        'education': request.form.get('education', ''),
-        'job_title': request.form.get('job_title', ''),
-        'experience': float(request.form.get('experience', 0))
-    }
+    try:
+        # Get user input from the form
+        age = float(request.form['age'])
+        gender = request.form['gender']
+        education_level = request.form['education_level']
+        job_title = request.form['job_title']
+        years_of_experience = float(request.form['years_of_experience'])
 
-    # Map user input to label-encoded values
-    input_data['gender'] = map_gender(input_data['gender'])
-    input_data['education'] = map_education(input_data['education'])
-    input_data['job_title'] = map_job_title(input_data['job_title'])
+        # Make a prediction using the loaded model
+        input_data = {
+            'Age': age,
+            'Gender': gender,
+            'Education Level': map_education(education_level),
+            'Job Title': map_job_title(job_title),
+            'Years of Experience': years_of_experience
+        }
 
-    # Make predictions using the loaded model
-    prediction = model.predict([[
-        input_data['age'],
-        input_data['gender'],
-        input_data['education'],
-        input_data['job_title'],
-        input_data['experience']
-    ]])[0]
+        input_df = pd.DataFrame([input_data])
+        prediction = model.predict(
+            input_df[['Age', 'Years of Experience', 'Education Level', 'Job Title', 'Years of Experience']])
 
-    # Pass the prediction to the template
-    return render_template('result.html', rc=f"Predicted Salary: ${prediction}")
+        # Render the result page with the prediction
+        return render_template('result.html', prediction=prediction[0])
+
+    except Exception as e:
+        return f"Error: {e}"
 
 
 def map_gender(gender):
@@ -61,7 +64,7 @@ def map_education(education):
                          'PhD': 5,
                          'Unknown': 6,
                          'phD': 7}
-    return education_mapping.get(education, 0)
+    return education_mapping.get(education.lower(), 4)
 
 
 def map_job_title(job_title):

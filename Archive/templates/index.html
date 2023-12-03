@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <form action="/predict" method="POST">
     <h2>Enter Your Information</h2>
 
@@ -21,17 +20,15 @@
       <option value="male">Male</option>
       <option value="female">Female</option>
       <option value="other">other</option>
-      <!-- Add more options if needed -->
     </select>
 
-    <label for="education">Education Level:</label>
-    <select name="education" required>
+    <label for="education_level">Education Level:</label>
+    <select name="education_level" required>
       <option value="high_school">High School</option>
       <option value="bachelor">Bachelor's Degree</option>
       <option value="master">Master's Degree</option>
       <option value="PhD">PhD</option>
       <option value="Unknown">Unknown</option>
-      <!-- Add more options if needed -->
     </select>
 
     <label for="job_title">Job Title:</label>
@@ -57,16 +54,14 @@
       <option value="18">Data Analyst</option>
       <option value="19">Data Entry Clerk</option>
       <option value="20">Data Scientist</option>
-      <!-- Add all other job titles with their respective values -->
-      <option value="193">Web Developer</option>
+      <!-- Add other job titles as needed -->
     </select>
 
-    <label for="experience">Years of Experience:</label>
-    <input type="text" name="experience" required>
+    <label for="years_of_experience">Years of Experience:</label>
+    <input type="text" name="years_of_experience" required>
 
     <input type="submit" value="Submit">
   </form>
-
 </body>
 
 </html>
