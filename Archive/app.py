@@ -33,7 +33,7 @@ def predict():
         # Make a prediction using the loaded model
         input_data = {
             'Age': age,
-            'Gender': gender,
+            'Gender': map_gender(gender),
             'Education Level': map_education(education_level),
             'Job Title': map_job_title(job_title),
             'Years of Experience': years_of_experience
@@ -41,7 +41,7 @@ def predict():
 
         input_df = pd.DataFrame([input_data])
         prediction = model.predict(
-            input_df[['Age', 'Years of Experience', 'Education Level', 'Job Title', 'Years of Experience']])
+            input_df[['Age', 'Gender', 'Education Level', 'Job Title', 'Years of Experience']])
 
         # Render the result page with the prediction
         return render_template('result.html', prediction=prediction[0])
