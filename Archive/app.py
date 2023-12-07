@@ -12,7 +12,7 @@ def init():
 
 # Load the trained model
 model = joblib.load(
-    '/Users/ruhuanliao/Fall 2023/AI/PredictProject/Archive/SalaryPrediction.pkl')
+    '../Archive/SalaryPrediction.pkl')
 
 
 @app.route('/')
